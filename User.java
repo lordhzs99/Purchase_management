@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,18 @@ public class User implements Serializable{
         pswd = sc.nextLine(); 
         User user = new User(name, pswd, 0.08f); 
         family.collection.add(user); 
+        File f = new File("./families/" + family.getFamily() + "/" + name); 
+        if(f.mkdir() != true){
+            System.out.println("Directory cannot be created because it already exists");
+        }
+        File reminders = new File("./families/" + family.getFamily() + "/" + name + "/reminders"); 
+        if(reminders.mkdir() != true){
+            System.out.println("Directory cannot be created because it already exists");
+        }
+        File purchases = new File("./families/" + family.getFamily() + "/" + name + "/purchases"); 
+        if(purchases.mkdir() != true){
+            System.out.println("Directory cannot be created because it already exists");
+        }
     }
 
      public static void userMenu(Families family, User user){
@@ -30,7 +43,7 @@ public class User implements Serializable{
         do{
             Scanner sc = new Scanner(System.in); 
             int op; 
-            System.out.println("- CURRENT BUDGET: " + user.getBudget());
+            System.out.println("- CURRENT BUDGET: " + user.getBudget() + "$ (USD)");
             System.out.println("[1] Add purchases");
             System.out.println("[2] View statistics");
             System.out.println("[3] View lasts purchases");

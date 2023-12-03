@@ -1,21 +1,30 @@
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.*;
 import javax.security.sasl.SaslException;
 
-import java.util.Iterator;
-import java.util.Hashtable; 
-import java.util.LinkedHashSet;
 public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in); 
         Hashtable<String, Families> map = new Hashtable<String, Families>( );
         List<User> list = new ArrayList<User>(), in = new ArrayList<User>();
+        System.out.println("INIzio");
+        try{
+            File file = new File("./users/database.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+            while ((st = br.readLine()) != null){
+               // System.out.println(st);
+                map.put(st, null); 
+            }
+        }catch(IOException e){
+            System.out.println("No elements in db");
+        }
+        catch(NullPointerException e){
+            System.out.println("INSIDE");
+        }
         do{
             System.out.println("[1] See current families");
             System.out.println("[2] Create family set");
@@ -46,7 +55,23 @@ public class Main {
                     Admin a = new Admin(name, pswd, budget);
                     Families s = new Families(famName, a); 
                     map.put(famName, s); 
-                    //Families.newSet(s);
+                    try{
+                        Writer output;
+                        output = new BufferedWriter(new FileWriter("./users/database.txt", true));
+                        output.append(famName+"\n");
+                        output.close();
+                    }
+                    catch(IOException e){
+                        System.out.println("Cannot append");
+                    }
+                    File f = new File("./families/" + famName);
+                    if (f.mkdir() != true) { 
+                        System.out.println("Directory cannot be created because it already exists"); 
+                    } 
+                    File ad = new File("./families/" + famName + "/" + name + " (Admin)"); 
+                    if(ad.mkdir() != true){
+                        System.out.println("Admin directory cannot be created");
+                    }
                     System.out.println("You've signed in succesfully, you can now acces to your family's account!");
                     break;
                 case 3: 
