@@ -2,21 +2,27 @@ package users;
 
 import java.io.*;
 import java.util.*;
+import stats.*;
 
 public class User implements Serializable{
     private String name, pswd;
     private double budget;  
+    public List <User> list; 
     public User(String name, String pswd, double budget){
         this.name = name; 
         this.pswd = pswd; 
         this.budget = budget; 
+        this.list = new ArrayList<>(); 
     }
     
     public static void addUser(Families family){
         Scanner sc = new Scanner(System.in); 
         String name, pswd;
+        System.out.println("-------------------");
+        System.out.println("Type the name of the new user: ");
         name = sc.nextLine(); 
-        String s = sc.nextLine(); 
+        //String s = sc.nextLine(); 
+        System.out.println("Type the password: ");
         pswd = sc.nextLine(); 
         User user = new User(name, pswd, 0.08f); 
         family.collection.add(user); 
@@ -55,11 +61,13 @@ public class User implements Serializable{
                     // STATISTICS
                     break;
                 case 3: 
+                    // last purchases
                     break;
                 case 4: 
+                    // reminder
                     break;
                 case 5: 
-                    // file_loader.saveData(family);
+                    file_loader.saveData(family, user);
                     break; 
                 case 6: 
                     return; 

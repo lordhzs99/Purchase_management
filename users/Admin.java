@@ -1,9 +1,10 @@
 package users;
 
+import java.io.Serializable;
 //import java.io.*;
 import java.util.*;
 
-public class Admin extends User{
+public class Admin extends User implements Serializable{
     public static int n; 
     public Admin(String name, String pswd, double budget){
         super(name, pswd, budget); 
