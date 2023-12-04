@@ -2,14 +2,16 @@ package stats;
 
 import java.util.*;
 import java.io.*;
+
+import users.Families;
 import users.User;
 
 public class file_loader implements Serializable {
 
-    public static void saveData(List<User> list){
+    public static void saveData(Families family, User user){
         try{
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("nodelist.dat"));
-            output.writeObject(list);
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("./families/" + family.getFamily() + "/" + user.getName() + "/purchases/purchaseslist.dat"));
+            output.writeObject(user.list);
             output.close();
         }
         catch(IOException e){
