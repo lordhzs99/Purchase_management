@@ -5,35 +5,50 @@ import javax.security.sasl.SaslException;
 import users.*;
 
 public class Main {
+
+    private static boolean isDirectoryEmpty(File directory) {
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            return files != null && files.length == 0;
+        } else {
+            return false;
+        }
+    }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in); 
         Hashtable<String, Families> map = new Hashtable<String, Families>( );
-        List<User> list = new ArrayList<User>(), in = new ArrayList<User>();
-        System.out.println("INIzio");
-        try{
-            File file = new File("./users/database.txt");
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String st;
-            while ((st = br.readLine()) != null){
-               // System.out.println(st);
-                map.put(st, null); 
+        String directoryPath = "./families";
+        File directory = new File(directoryPath);
+        if (!isDirectoryEmpty(directory)) {
+            File[] subDirectories = directory.listFiles(File::isDirectory);
+            for (File subDir : subDirectories) {
+                File[] objectFiles = subDir.listFiles((dir, name) -> name.endsWith(".dat"));
+                for (File objectFile : objectFiles) {
+                    try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(objectFile))) {
+                        Object obj = input.readObject();
+                        if (obj instanceof Families) {
+                            Families family = (Families) obj;
+                            map.put(subDir.getName(), family);
+                        }
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        }catch(IOException e){
-            System.out.println("No elements in db");
-        }
-        catch(NullPointerException e){
-            System.out.println("INSIDE");
-        }
+        } 
         do{
             System.out.println("[1] See current families");
             System.out.println("[2] Create family set");
             System.out.println("[3] Log in");
+            System.out.println("[4] Quit");
             int op = sc.nextInt(); 
             switch (op) {
                 case 1:
+                    System.out.println("\n----- CURRENT FAMILIES -----");
                     for(Map.Entry<String, Families> fam : map.entrySet()){
                         System.out.println(fam.getKey() + "'s family");
                     }
+                    System.out.println("----------------------------\n");
                     break;
                 case 2: 
                     Scanner sc2 = new Scanner(System.in); 
@@ -82,7 +97,9 @@ public class Main {
                     }else{
                         System.out.println("Your family is not registered yet");
                     }
+                    break; 
                 case 4: 
+                    System.out.println("Thanks for using PriceManagement.net, come back soon!");
                     return; 
                 default:
                     System.out.println("Invalid");
