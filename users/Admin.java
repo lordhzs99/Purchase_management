@@ -15,14 +15,19 @@ public class Admin extends User implements Serializable{
         Scanner sc = new Scanner(System.in); 
         do{
             int op; 
-            System.out.println("[1] Modify budget");
-            System.out.println("[2] View statistics");
-            System.out.println("[3] Save data from family members");
-            System.out.println("[4] Delete family member from family set");
-            System.out.println("[5] Exit");
+            System.out.println("[1] Add purchases");
+            System.out.println("[2] Modify budget");
+            System.out.println("[3] View statistics");
+            System.out.println("[4] Save data from family members");
+            System.out.println("[5] Delete family member from family set");
+            System.out.println("[6] Exit");
             op = sc.nextInt(); 
             switch (op) {
+
                 case 1:
+                    //add purchases();
+                    break;
+                case 2:
                     Scanner sc2 = new Scanner(System.in);
                     String name; 
                     boolean found = false; 
@@ -40,13 +45,13 @@ public class Admin extends User implements Serializable{
                         System.out.println("Budget succesfully modified");
                     }
                     break;
-                case 2: 
+                case 3: 
                     // STATISTICS
                     break;
-                case 3: 
+                case 4: 
                     // file_loader.saveData(family);
                     break;
-                case 4: 
+                case 5: 
                     Scanner sc3 = new Scanner(System.in); 
                     String name3; 
                     boolean found3 = false; 
@@ -63,7 +68,7 @@ public class Admin extends User implements Serializable{
                     }else{
                         System.out.println("Member succesfully deleted");
                     }
-                case 5: 
+                case 6: 
                     return; 
                 default:
                     System.out.println("Invalid option");
