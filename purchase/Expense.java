@@ -9,6 +9,16 @@ public abstract class  Expense {
     private String concept;
     private String date;
 
-    
+    abstract float getPercentage();
+
+    public double getAmount(){
+        return amount;
+    }
+    public String getConcept(){
+        return concept;
+    }
+    public String getDate(){
+        return date;
+    }
 
 }
