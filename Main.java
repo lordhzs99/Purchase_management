@@ -5,7 +5,7 @@ import javax.security.sasl.SaslException;
 import users.*;
 
 public class Main {
-
+// alkdfja lkdjf aldfkj
     private static boolean isDirectoryEmpty(File directory) {
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
