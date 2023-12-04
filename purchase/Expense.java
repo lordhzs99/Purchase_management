@@ -4,10 +4,11 @@ import java.util.regex.*;
 
 public abstract class  Expense {
     
-    static Pattern datePattern = Pattern.compile("[0-3]\\d/[0-1]\\d/d{4}");
-    private double amount;
-    private String concept;
-    private String date;
+    public static double total = 0;
+    protected static Pattern datePattern = Pattern.compile("[0-3]\\d/[0-1]\\d/\\d{4}");
+    protected double amount;
+    protected String concept;
+    protected String date;
 
     abstract float getPercentage();
 
