@@ -63,8 +63,8 @@ public class User implements Serializable{
                 case 3: 
                     // last purchases
                     break;
-                case 4: 
-                    // reminder
+                case 4:
+                    Reminder.RMenu(user);
                     break;
                 case 5: 
                     file_loader.saveData(family, user);
