@@ -20,6 +20,7 @@ public class User implements Serializable{
         categories.add(new Fun());
         categories.add(new Food());
         categories.add(new Services());
+        this.reminder = new Reminder();
     }
     
     public static void addUser(Families family){
