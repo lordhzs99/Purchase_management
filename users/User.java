@@ -52,7 +52,10 @@ public class User implements Serializable{
         System.out.println("Welcome " + user.getName() + ", what you wanna do today?");
         do{
             Scanner sc = new Scanner(System.in); 
-            int op; 
+            int op;
+
+            user.getReminder().showReminders();
+            
             System.out.println("- CURRENT BUDGET: " + user.getBudget() + "$ (USD)");
             System.out.println("[1] Add purchases");
             System.out.println("[2] View statistics");
