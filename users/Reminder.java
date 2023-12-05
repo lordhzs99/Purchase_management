@@ -45,4 +45,17 @@ class Reminder {
         addExpense(newExpense);
         System.out.println("Recurrent expense added successfully");
     }
+
+     public void showReminders() {
+        if (recurrentExpenses.isEmpty()) {
+            System.out.println("No hay recordatorios guardados.");
+        } else {
+            System.out.println("Recordatorios:");
+            for (RecurrentExpense expense : recurrentExpenses) {
+                System.out.println("Fecha del próximo pago para " + expense.getName() +
+                        ": " + expense.getNextPaymentDate() +
+                        ", Monto: " + expense.getAmount());
+            }
+        }
+    }
 }
