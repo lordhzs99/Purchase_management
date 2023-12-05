@@ -4,8 +4,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.Iterator;
 
 class Reminder {
+
     private List<RecurrentExpense> recurrentExpenses;
 
     public Reminder() {
@@ -55,6 +58,21 @@ class Reminder {
                 System.out.println("Fecha del próximo pago para " + expense.getName() +
                         ": " + expense.getNextPaymentDate() +
                         ", Monto: " + expense.getAmount());
+            }
+        }
+    }
+
+    public void removeExpiredReminders() {
+        LocalDate today = LocalDate.now();
+        Iterator<RecurrentExpense> iterator = recurrentExpenses.iterator();
+
+        while (iterator.hasNext()) {
+            RecurrentExpense expense = iterator.next();
+
+            // Verificar si la fecha del próximo pago es anterior a la fecha actual
+            if (expense.getNextPaymentDate().isBefore(today)) {
+                System.out.println("Eliminando recordatorio vencido: " + expense.getName());
+                iterator.remove();
             }
         }
     }
