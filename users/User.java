@@ -3,16 +3,23 @@ package users;
 import java.io.*;
 import java.util.*;
 import stats.*;
+import purchase.*;
 
 public class User implements Serializable{
     private String name, pswd;
     private double budget;  
     public List <User> list; 
+    private LinkedList<Object> categories; 
+
     public User(String name, String pswd, double budget){
         this.name = name; 
         this.pswd = pswd; 
         this.budget = budget; 
         this.list = new ArrayList<>(); 
+        categories = new LinkedList<>();
+        categories.add(new Fun());
+        categories.add(new Food());
+        categories.add(new Services());
     }
     
     public static void addUser(Families family){
@@ -55,7 +62,7 @@ public class User implements Serializable{
             op = sc.nextInt(); 
             switch (op) {
                 case 1:
-                    // addPurchases();
+                    addPurchase(user);
                     break;
                 case 2: 
                     // STATISTICS
@@ -76,6 +83,10 @@ public class User implements Serializable{
                     break;
             }
         }while(true); 
+    }
+
+    protected static void addPurchase(User user){
+        
     }
 
     public void setName(String name){

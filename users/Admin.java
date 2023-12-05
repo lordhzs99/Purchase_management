@@ -1,10 +1,9 @@
 package users;
 
-import java.io.Serializable;
 //import java.io.*;
 import java.util.*;
 
-public class Admin extends User implements Serializable{
+public class Admin extends User{
     public static int n; 
     public Admin(String name, String pswd, double budget){
         super(name, pswd, budget); 
@@ -25,7 +24,7 @@ public class Admin extends User implements Serializable{
             switch (op) {
 
                 case 1:
-                    //add purchases();
+                    addPurchase(admin);
                     break;
                 case 2:
                     Scanner sc2 = new Scanner(System.in);
