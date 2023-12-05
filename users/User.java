@@ -105,4 +105,7 @@ public class User implements Serializable{
     public double getBudget(){
         return budget; 
     }
+public Reminder getReminder() {
+        return reminder;
+    }
 }
